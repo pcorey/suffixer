@@ -1,0 +1,27 @@
+<head>
+  <title>Suffixer</title>
+</head>
+
+<body>
+    <h1>Suffixer!</h1>
+
+    <label for="word">Search</label>
+    <input name="word">
+
+    <label for="definition">Definition</label>
+    <input name="definition">
+
+    <label for="suffix">Suffix</label>
+    <input name="suffix">
+
+    <ul>
+    {{#each entries}}
+        <li><em>{{word}}</em> - {{definition}}</li>
+    {{/each}}
+    </ul>
+</body>
+
+<template name="hello">
+    <button>Click Me</button>
+    <p>You've pressed the button {{counter}} times.</p>
+</template>
