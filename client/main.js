@@ -18,6 +18,9 @@ Template.body.events({
     },
     'keyup input[name=definition]': function(e, t) {
         Session.set('definition', t.find('input[name=definition]').value);
+    },
+    'click button': function(e, t) {
+        console.log('Testy: ',Meteor.call('testy'));
     }
 })
 
@@ -37,6 +40,11 @@ Meteor.autorun(function() {
         limit: 20,
         sort: {word: 1}
     });
+});
+
+Meteor.autorun(function() {
+    var results = Dictionary.find({}).fetch();
+    console.log('rerunning...', results);
 });
 
 //TODO: Move to full text seach mongo instance:
