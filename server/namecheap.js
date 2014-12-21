@@ -8,3 +8,13 @@ Meteor.startup(function() {
                                                     process.env.NAMECHEAP_CLIENT_IP,
                                                     process.env.NAMECHEAP_SANDBOX);
 });
+
+Meteor.publish('dictionary-namecheap', function(selector, options) {
+    var results = Dictionary.find(selector, options);
+    _.forEach(results.fetch(), function(result) {
+        if (result) {
+            console.log(result.word);
+        }
+    });
+    return results;
+});
