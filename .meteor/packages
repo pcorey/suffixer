@@ -12,4 +12,5 @@ meteorhacks:npm
 npm-container
 fourseven:scss
 stevezhu:lodash
+momentjs:moment
 
