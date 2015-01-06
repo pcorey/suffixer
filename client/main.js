@@ -9,20 +9,19 @@ Template.body.helpers({
 });
 
 Template.body.events({
-    'keyup input[name=word]': function(e, t) {
-        console.log('word change');
-        Session.set('word', t.find('input[name=word]').value);
+    'keyup #word': function(e, t) {
+        Session.set('word', e.target.value);
     },
-    'keyup input[name=suffix]': function(e, t) {
-        Session.set('suffix', t.find('input[name=suffix]').value);
+    'keyup #suffix': function(e, t) {
+        Session.set('suffix', e.target.value);
     },
-    'keyup input[name=definition]': function(e, t) {
-        Session.set('definition', t.find('input[name=definition]').value);
+    'keyup #definition': function(e, t) {
+        Session.set('definition', e.target.value);
     },
     'click button': function(e, t) {
         console.log('Testy: ',Meteor.call('testy'));
     }
-})
+});
 
 Meteor.autorun(function() {
     var regex = Session.get('word')

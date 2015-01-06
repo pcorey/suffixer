@@ -1,3 +1,22 @@
-body {
-    font-family: Sans-Serif;
+html,body {
+  height: 100%;
+  margin: 0;
+  font-family: 'RobotoDraft', sans-serif;
 }
+core-header-panel {
+  height: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+core-toolbar {
+  background: #03a9f4;
+  color: white;
+}
+
+.item {
+    margin: 10px 20px;
+}
+
+// body {
+//     font-family: Sans-Serif;
+// }

@@ -1,26 +1,66 @@
 <head>
-  <title>Suffixer</title>
+    <title>Suffixer</title>
+    <!-- Web Componenets polyfill -->
+    <script src="/components/webcomponentsjs/webcomponents.js"></script>
+    <link rel="import" href="/components/font-roboto/roboto.html">
+    <link rel="import" href="/components/core-header-panel/core-header-panel.html">
+    <link rel="import" href="/components/core-toolbar/core-toolbar.html">
+    <link rel="import" href="/components/paper-shadow/paper-shadow.html">
+    <link rel="import" href="/components/paper-input/paper-input.html">
+    <link rel="import" href="/components/paper-item/paper-item.html">
+    <link rel="import" href="/components/paper-button/paper-button.html">
+    <link rel="import" href="/components/paper-spinner/paper-spinner.html">
 </head>
 
 <body>
-    <h1>Suffixer!</h1>
 
-    <label for="word">Search</label>
-    <input name="word">
+    <core-header-panel>
+        <core-toolbar>
+            <h1>Suffixer!</h1>
+        </core-toolbar>
 
-    <label for="definition">Definition</label>
-    <input name="definition">
+        <div horizontal layout>
+            <paper-input id="word" label="Word" floatingLabel flex></paper-input>
+            <paper-input id="definition" label="Definition" floatingLabel flex></paper-input>
+            <paper-input id="suffix" label="Suffix" floatingLabel flex></paper-input>
+        </div>
 
-    <label for="suffix">Suffix</label>
-    <input name="suffix">
+        {{#each entries}}
+            <paper-shadow class="item">
+                <paper-item horizontal>
+                    <p flex style="text-overflow: ellipsis;"><em>{{word}}</em> - {{definition}}</p>
+                    <paper-spinner role="checking" active="true"></paper-spinner></paper-item>
+            </paper-shadow>
+        {{/each}}
+    </core-header-panel>
 
-    <button>Test</button>
+    <!-- <core-header-panel>
+        <core-toolbar>
+            <paper-tabs id="tabs" selected="all" self-end>
+                <paper-tab name="all">All</paper-tab>
+                <paper-tab name="favorites">Favorites</paper-tab>
+            </paper-tabs>
+        </core-toolbar>
+        <h1>Suffixer!</h1>
 
-    <ul>
-    {{#each entries}}
-        <li><em>{{word}}</em> - {{definition}} [{{status}}]</li>
-    {{/each}}
-    </ul>
+        <label for="word">Search</label>
+        <input name="word">
+
+        <label for="definition">Definition</label>
+        <input name="definition">
+
+        <label for="suffix">Suffix</label>
+        <input name="suffix">
+
+        <button>Test</button>
+
+        <ul>
+        {{#each entries}}
+            <li><em>{{word}}</em> - {{definition}} <paper-spinner role="checking" active></paper-spinner></li>
+        {{/each}}
+        </ul>
+    </core-header-panel> -->
+
 </body>
 
 <template name="hello">
