@@ -103,6 +103,11 @@ if (Meteor.isServer) {
                 part_of_speech: word[2],
                 definition: text
             });
+            // Wiktionary.upsert({
+            //     word: String(word[1]).trim()
+            // }, {
+            //     $push: {definition: text}
+            // });
         }
 
         try {

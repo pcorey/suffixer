@@ -41,6 +41,8 @@ Meteor.autorun(function() {
     });
 });
 
+Meteor.subscribe('tlds');
+
 Meteor.autorun(function() {
     var results = Wiktionary.find({}).fetch();
     console.log('rerunning...', results);

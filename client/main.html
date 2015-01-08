@@ -13,47 +13,11 @@
 </head>
 
 <body>
-
     <core-header-panel>
         {{> header}}
-
         {{> controls}}
-
         {{#each entries}}
             {{> entry}}
         {{/each}}
     </core-header-panel>
-
-    <!-- <core-header-panel>
-        <core-toolbar>
-            <paper-tabs id="tabs" selected="all" self-end>
-                <paper-tab name="all">All</paper-tab>
-                <paper-tab name="favorites">Favorites</paper-tab>
-            </paper-tabs>
-        </core-toolbar>
-        <h1>Suffixer!</h1>
-
-        <label for="word">Search</label>
-        <input name="word">
-
-        <label for="definition">Definition</label>
-        <input name="definition">
-
-        <label for="suffix">Suffix</label>
-        <input name="suffix">
-
-        <button>Test</button>
-
-        <ul>
-        {{#each entries}}
-            <li><em>{{word}}</em> - {{definition}} <paper-spinner role="checking" active></paper-spinner></li>
-        {{/each}}
-        </ul>
-    </core-header-panel> -->
-
 </body>
-
-<template name="hello">
-    <button>Click Me</button>
-    <p>You've pressed the button {{counter}} times.</p>
-</template>
