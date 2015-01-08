@@ -53,11 +53,15 @@ function initTLDPublication() {
 
 function initWiktionaryNamecheapPublication() {
 
+    function entryExpired(entry) {
+        return !entry.last_checked ||
+               !moment(entry.last_checked).add(1,'hour').isAfter(moment());
+    }
+
     Meteor.publish('wiktionary-namecheap', function(selector, options) {
         var results = Wiktionary.find(selector, options);
-        _.forEach(results.fetch(), function(result) {
-            if (!result.last_checked ||
-                !moment(result.last_checked).add(1,'hour').isAfter(moment())) {
+        _.each(results.fetch(), function(result) {
+            if (entryExpired(result)) {
                 //console.log('calling timeout for result ',result.word);
                 //Wiktionary.update(result._id, {$set: {last_checked: new Date()}});
 
