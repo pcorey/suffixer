@@ -4,7 +4,7 @@ Session.set('definition', '');
 
 Template.body.helpers({
     entries: function() {
-        return Dictionary.find({});
+        return Wiktionary.find({});
     }
 });
 
@@ -42,7 +42,7 @@ Meteor.autorun(function() {
 });
 
 Meteor.autorun(function() {
-    var results = Dictionary.find({}).fetch();
+    var results = Wiktionary.find({}).fetch();
     console.log('rerunning...', results);
 });
 
