@@ -32,7 +32,7 @@ Meteor.autorun(function() {
         : '';
     console.log('regex:',regex);
     
-    Meteor.subscribe('dictionary-namecheap', {
+    Meteor.subscribe('wiktionary-namecheap', {
         word: {$regex: regex, $options: 'i'},
         definition: {$regex: definitionRegex, $options: 'i'}
     }, {

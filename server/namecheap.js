@@ -14,6 +14,7 @@ function initNamecheap() {
 }
 
 function initTLDPublication() {
+
     function tldsExpired(tlds) {
         var first = tlds.fetch()[0];
         return !first ||
@@ -41,61 +42,47 @@ function initTLDPublication() {
 
     Meteor.publish('tlds', function() {
         var tlds = TLDs.find();
-
         if (tldsExpired(tlds)) {
             console.log('Updating TLD list via Namecheap');
             updateAllTLDs();
         }
         return tlds;
     });
+
+}
+
+function initWiktionaryNamecheapPublication() {
+
+    Meteor.publish('wiktionary-namecheap', function(selector, options) {
+        var results = Wiktionary.find(selector, options);
+        _.forEach(results.fetch(), function(result) {
+            if (!result.last_checked ||
+                !moment(result.last_checked).add(1,'hour').isAfter(moment())) {
+                //console.log('calling timeout for result ',result.word);
+                //Wiktionary.update(result._id, {$set: {last_checked: new Date()}});
+
+                setTimeout(Meteor.bindEnvironment(function() {
+                    //console.log('Updating result ',result.word);
+                    //Wiktionary.update(result._id, {$set: {status: 'R'}});
+                }), Math.random()*2000);
+            }
+        });
+        return results;
+    });
+
 }
 
 Meteor.startup(function() {
     initNamecheap();
     initTLDPublication();
+    initWiktionaryNamecheapPublication();
 });
 
-Meteor.publish('dictionary-namecheap', function(selector, options) {
-    var results = Wiktionary.find(selector, options);
-    _.forEach(results.fetch(), function(result) {
-        if (!result.last_checked ||
-            !moment(result.last_checked).add(1,'hour').isAfter(moment())) {
-            //console.log('calling timeout for result ',result.word);
-            //Wiktionary.update(result._id, {$set: {last_checked: new Date()}});
 
-            setTimeout(Meteor.bindEnvironment(function() {
-                //console.log('Updating result ',result.word);
-                //Wiktionary.update(result._id, {$set: {status: 'R'}});
-            }), Math.random()*2000);
-        }
-    });
-    return results;
-});
 
 Meteor.methods({
     getTLDs: function() {
         console.log('in getTLDs', namecheap);
-        // var res = Async.runSync(function(done) {
-        //     namecheap.domains.getTldList(function(err, res) {
-        //         console.log('in callback');
-        //         done(err, res);
-        //     });
-        // });
-        // console.log('returning res', res);
-        // return res;
         return Async.wrap(namecheap.domains.getTldList)();
     }
 });
-
-/* TLDs:
-
-
-{
-    last_checked: datetime
-    tlds: [
-        blah
-        blag2
-    ]
-}
-
-*/
