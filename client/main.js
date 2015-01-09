@@ -1,10 +1,14 @@
-Session.set('suffix', 'io');
+Session.set('suffix', '');
 Session.set('word', '');
 Session.set('definition', '');
 
 Template.body.helpers({
     entries: function() {
-        return Wiktionary.find({});
+        return Wiktionary.find({}, {
+            transform: function(entry) {
+                return new Domain(entry, Session.get('suffix'));
+            }
+        });
     }
 });
 
@@ -41,10 +45,14 @@ Meteor.autorun(function() {
 
 Meteor.subscribe('tlds');
 
-Meteor.autorun(function() {
-    var results = Wiktionary.find({}).fetch();
-    console.log('rerunning...', results);
-});
+// Meteor.autorun(function() {
+//     var results = Wiktionary.find({}, {
+//         transform: function(entry) {
+//             return new Domain(entry, Session.get('suffix'));
+//         }
+//     }).fetch();
+//     console.log('rerunning...', results);
+// });
 
 //TODO: Move to full text seach mongo instance:
 //http://www.meteorpedia.com/read/Fulltext_search

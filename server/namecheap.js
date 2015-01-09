@@ -66,9 +66,9 @@ function initWiktionaryNamecheapPublication() {
         // console.log('regex:',regex);
         suffix = suffix ? suffix.replace(/\./g, '') : '';
         if (word) {
-            return '.*?' + word + '.*?' + suffix + '$';
+            return '.+' + word + '.*?' + suffix + '$';
         }
-        return suffix + '$';
+        return '[a-zA-Z0-9][a-zA-Z0-0-]*[a-zA-Z0-9]?' + suffix + '$';
     }
 
     function getDefinitionRegex(definition) {

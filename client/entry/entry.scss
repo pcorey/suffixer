@@ -1,16 +1,36 @@
 .entry {
 
     margin: 10px;
+    // padding: 1px 6px;
+
+    .header {
+        margin: 0 10px;
+        width: calc(100% - 20px);
+    }
 
     .item {
-        margin: 10px;
+        // margin: 0;
+        // min-height: 0;
+        // line-height: 1;
+    }
+
+    .definitions {
+        padding-bottom: 10px;
     }
 
     .word {
-        em {
-            font-style: normal;
-            font-weight: bold;
-        }
+        display: inline-block;
+        font-style: normal;
+        font-weight: bold;
     }
 
+    a {
+        text-decoration: none;
+        color: #03a9f4;
+        margin-right: 10px;
+    }
+
+    ul {
+        margin: 0;
+    }
 }

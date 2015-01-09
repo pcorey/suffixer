@@ -1,8 +1,21 @@
 <template name="entry">
     <paper-shadow class="entry">
-        <core-item class="item" horizontal>
-            <p class="word" flex><em>{{word}}</em> - {{definition}} {{checking}}</p>
+        <div class="wrapper">
+            <core-item class="header" horizontal layout>
+                <em class="word" flex>{{word}}</em>
+                <span><a href="https://www.namecheap.com/domains/registration/results.aspx?domain={{formatDomain}}">{{formatDomain}}</a></span>
+                <paper-spinner role="checking" active="true"></paper-spinner>
+            </core-item>
+            <div class="definitions">
+                <ul>
+                    <li>{{definition}}</li>
+                </ul>
+            </div>
+            <!-- <em class="word" flex>{{word}}</em>
+            <span><a href="https://www.namecheap.com/domains/registration/results.aspx?domain={{formatDomain}}">{{formatDomain}}</a></span>
             <paper-spinner role="checking" active="true"></paper-spinner>
-        </core-item>
+            <br>
+            <span class="bottom">{{definition}}</span> -->
+        </div>
     </paper-shadow>
 </template>
