@@ -1,14 +1,14 @@
 function initNamecheap() {
-    console.log('Instantiating Namecheap with: ', process.env.NAMECHEAP_USERNAME,
-                                                  process.env.NAMECHEAP_API_KEY,
-                                                  process.env.NAMECHEAP_CLIENT_IP,
-                                                  process.env.NAMECHEAP_SANDBOX);
+    console.log('Instantiating Namecheap with: ', Meteor.settings.namecheap.username,
+                                                  Meteor.settings.namecheap.api_key,
+                                                  Meteor.settings.namecheap.client_ip,
+                                                  Meteor.settings.namecheap.sandbox);
 
     Namecheap = Meteor.npmRequire('namecheap');
-    namecheap = new Namecheap(process.env.NAMECHEAP_USERNAME,
-                              process.env.NAMECHEAP_API_KEY,
-                              process.env.NAMECHEAP_CLIENT_IP,
-                              process.env.NAMECHEAP_SANDBOX);
+    namecheap = new Namecheap(Meteor.settings.namecheap.username,
+                              Meteor.settings.namecheap.api_key,
+                              Meteor.settings.namecheap.client_ip,
+                              Meteor.settings.namecheap.sandbox);
 }
 
 function initTLDPublication() {
