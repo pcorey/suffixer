@@ -1,7 +1,8 @@
 <template name="entry">
-    <paper-shadow class="item">
-        <paper-item horizontal>
-            <p flex style="text-overflow: ellipsis;"><em>{{word}}</em> - {{definition}} {{checking}}</p>
-            <paper-spinner role="checking" active="true"></paper-spinner></paper-item>
+    <paper-shadow class="entry">
+        <core-item class="item" horizontal>
+            <p class="word" flex><em>{{word}}</em> - {{definition}} {{checking}}</p>
+            <paper-spinner role="checking" active="true"></paper-spinner>
+        </core-item>
     </paper-shadow>
 </template>

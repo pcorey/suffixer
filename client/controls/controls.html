@@ -1,6 +1,15 @@
 <template name="controls">
     <div horizontal layout>
         <paper-input id="definition" label="Meaning / definition" floatingLabel flex></paper-input>
-        <paper-input id="suffix" label="Suffix / TLD" floatingLabel flex></paper-input>
+        <!-- <paper-input id="suffix" label="Suffix / TLD" floatingLabel flex></paper-input> -->
+        <core-dropdown-menu id="suffix" label="Suffix / TLD" flex>
+            <core-dropdown class="dropdown">
+                <core-selector>
+                    {{#each tlds}}
+                    <core-item label="{{tld}}"></core-item>
+                    {{/each}}
+                </core-selector>
+            </core-dropdown>
+        </core-dropdown-menu>
     </div>
 </template>

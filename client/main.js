@@ -12,8 +12,8 @@ Template.body.events({
     'keyup #word': function(e, t) {
         Session.set('word', e.target.value);
     },
-    'keyup #suffix': function(e, t) {
-        Session.set('suffix', e.target.value);
+    'core-select #suffix': function(e, t) {
+        Session.set('suffix', e.originalEvent.detail.item.label);
     },
     'keyup #definition': function(e, t) {
         Session.set('definition', e.target.value);
@@ -32,13 +32,11 @@ Meteor.autorun(function() {
         : '';
     console.log('regex:',regex);
     
-    Meteor.subscribe('wiktionary-namecheap', {
-        word: {$regex: regex, $options: 'i'},
-        definition: {$regex: definitionRegex, $options: 'i'}
-    }, {
-        limit: 20,
-        sort: {word: 1}
-    });
+    Meteor.subscribe('wiktionary-namecheap',
+        Session.get('word'),
+        Session.get('suffix'),
+        Session.get('definition'),
+        20);
 });
 
 Meteor.subscribe('tlds');

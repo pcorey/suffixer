@@ -1,5 +1,3 @@
-TLDs = new Meteor.Collection('tlds');
-
 function initNamecheap() {
     console.log('Instantiating Namecheap with: ', process.env.NAMECHEAP_USERNAME,
                                                   process.env.NAMECHEAP_API_KEY,
@@ -58,8 +56,46 @@ function initWiktionaryNamecheapPublication() {
                !moment(entry.last_checked).add(1,'hour').isAfter(moment());
     }
 
-    Meteor.publish('wiktionary-namecheap', function(selector, options) {
-        var results = Wiktionary.find(selector, options);
+    function getWordRegex(word, suffix) {
+        // var regex = Session.get('word')
+        //     ? ('.*?'+Session.get('word')+'.*?'+Session.get('suffix')+'$')
+        //     : (Session.get('suffix')+'$');
+        // var definitionRegex = Session.get('definition')
+        //     ? ('.*?'+Session.get('definition')+'.*?')
+        //     : '';
+        // console.log('regex:',regex);
+        suffix = suffix ? suffix.replace(/\./g, '') : '';
+        if (word) {
+            return '.*?' + word + '.*?' + suffix + '$';
+        }
+        return suffix + '$';
+    }
+
+    function getDefinitionRegex(definition) {
+        if (definition) {
+            return '.*?'+definition+'.*?';
+        }
+        return '';
+    }
+
+    function getSelector(word, suffix, definition) {
+        return {
+            word: {$regex: getWordRegex(word, suffix), $options: 'i'},
+            definition: {$regex: getDefinitionRegex(definition), $options: 'i'}
+        };
+    }
+
+    function getOptions(limit) {
+        return {
+            limit: Math.min(limit, 20),
+            sort: {word: 1}
+        };
+    }
+
+    Meteor.publish('wiktionary-namecheap', function(word, suffix, definition, limit) {
+        var results = Wiktionary.find(
+            getSelector(word, suffix, definition),
+            getOptions(limit));
         _.each(results.fetch(), function(result) {
             if (entryExpired(result)) {
                 //console.log('calling timeout for result ',result.word);
@@ -80,13 +116,4 @@ Meteor.startup(function() {
     initNamecheap();
     initTLDPublication();
     initWiktionaryNamecheapPublication();
-});
-
-
-
-Meteor.methods({
-    getTLDs: function() {
-        console.log('in getTLDs', namecheap);
-        return Async.wrap(namecheap.domains.getTldList)();
-    }
 });
