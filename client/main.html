@@ -22,10 +22,12 @@
 
 <body>
     <core-header-panel>
+        <div style="max-width: 50%; margin: 10px auto; border: 1px solid #EEE;">
         {{> header}}
         {{> controls}}
         {{#each entries}}
             {{> entry}}
         {{/each}}
+        </div>
     </core-header-panel>
 </body>
