@@ -2,5 +2,11 @@
     <core-toolbar>
         <h1>Suffixer!</h1>
         <p flex>Find meaningful unregistered URLs</p>
+        <core-icon-button class="info-button" icon="info-outline"></core-icon-button>
+        <paper-action-dialog class="info-modal" backdrop autoCloseDisabled layered="false">
+            <p>Suffixer can be used to find unique, unregistered domain names by searching for a word's definition. The results will all end in the selected TLD (Top Level Domain), or any available TLD if none was selected.</p>
+            <p>Suffixer is powered by <a href="http://www.wiktionary.org/">Wiktionary</a> and <a href="https://www.namecheap.com/">Namecheap</a>.</p>
+            <paper-button affirmative autofocus>Tap me to close</paper-button>
+        </paper-action-dialog>
     </core-toolbar>
 </template>
