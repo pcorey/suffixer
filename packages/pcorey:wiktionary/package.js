@@ -15,5 +15,5 @@ Package.onUse(function(api) {
   api.use('mongo', ['client', 'server']);
   api.addFiles('pcorey:wiktionary.js');
   api.addFiles('enwikt-defs-20140609-en.tsv', 'server', {isAsset: true});
-    api.export('Wiktionary', ['client', 'server']);
+  api.export('Wiktionary', ['client', 'server']);
 });

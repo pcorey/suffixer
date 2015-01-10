@@ -1,54 +1,3 @@
-function initNamecheap() {
-    console.log('Instantiating Namecheap with: ', Meteor.settings.namecheap.username,
-                                                  Meteor.settings.namecheap.api_key,
-                                                  Meteor.settings.namecheap.client_ip,
-                                                  Meteor.settings.namecheap.sandbox);
-
-    Namecheap = Meteor.npmRequire('namecheap');
-    namecheap = new Namecheap(Meteor.settings.namecheap.username,
-                              Meteor.settings.namecheap.api_key,
-                              Meteor.settings.namecheap.client_ip,
-                              Meteor.settings.namecheap.sandbox);
-}
-
-function initTLDPublication() {
-
-    function tldsExpired(tlds) {
-        var first = tlds.fetch()[0];
-        return !first ||
-               !first.last_checked ||
-               !moment(first.last_checked).add(1,'day').isAfter(moment());
-    }
-
-    function updateTLD(name, last_checked) {
-        TLDs.upsert({
-            tld: name
-        }, {
-            $set: {
-                last_checked: last_checked
-            }
-        });
-    }
-
-    function updateAllTLDs() {
-        var list = Async.wrap(namecheap.domains.getTldList)();
-        var last_checked = new Date();
-        _.each(list.Tlds.Tld, function(tld) {
-            updateTLD(tld.Name, last_checked);
-        });
-    }
-
-    Meteor.publish('tlds', function() {
-        var tlds = TLDs.find();
-        if (tldsExpired(tlds)) {
-            console.log('Updating TLD list via Namecheap');
-            updateAllTLDs();
-        }
-        return tlds;
-    });
-
-}
-
 function initWiktionaryNamecheapPublication() {
 
     function entryExpired(entry) {
@@ -113,7 +62,5 @@ function initWiktionaryNamecheapPublication() {
 }
 
 Meteor.startup(function() {
-    initNamecheap();
-    initTLDPublication();
     initWiktionaryNamecheapPublication();
 });

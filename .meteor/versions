@@ -41,6 +41,8 @@ mongo-livedata@1.0.7
 npm-container@1.0.0
 observe-sequence@1.0.4
 ordered-dict@1.0.2
+pcorey:namecheap@1.0.0
+pcorey:namecheap-tlds@1.0.0
 pcorey:wiktionary@1.0.0
 random@1.0.2
 reactive-dict@1.0.5
