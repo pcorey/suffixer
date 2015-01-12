@@ -13,6 +13,7 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.0.2.1');
   api.use('mongo', ['client', 'server']);
+  api.use('pcorey:namecheap-tlds');
   api.addFiles('pcorey:wiktionary.js');
   api.addFiles('enwikt-defs-20140609-en.tsv', 'server', {isAsset: true});
   api.export('Wiktionary', ['client', 'server']);
