@@ -3,12 +3,16 @@
         <div class="wrapper">
             <core-item class="header" horizontal layout>
                 <em class="word" flex>{{word}}</em>
-                <span><a href="https://www.namecheap.com/domains/registration/results.aspx?domain={{formatDomain}}">{{formatDomain}}</a></span>
+                {{#each domains}}
+                <span><a href="https://www.namecheap.com/domains/registration/results.aspx?domain={{domain}}">{{domain}}</a></span>
+                {{/each}}
                 <paper-spinner role="checking" active="true"></paper-spinner>
             </core-item>
             <div class="definitions">
                 <ul>
-                    <li>{{definition}}</li>
+                    {{#each definition}}
+                    <li>{{this}}</li>
+                    {{/each}}
                 </ul>
             </div>
             <!-- <em class="word" flex>{{word}}</em>

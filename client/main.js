@@ -4,11 +4,7 @@ Session.set('definition', '');
 
 Template.body.helpers({
     entries: function() {
-        return Wiktionary.find({}, {
-            transform: function(entry) {
-                return new Domain(entry, Session.get('suffix'));
-            }
-        });
+        return Wiktionary.find();
     }
 });
 

@@ -39,7 +39,7 @@ if (Meteor.isServer) {
             word = word.toLowerCase().replace(/[^a-zA-Z0-9-]/g, '');
             return tlds.reduce(function(domains, tld) {
                 tld = tld.toLowerCase().replace(/[^a-z]/g, '');
-                var match = word.match(new RegExp('^(.*?)' + tld + '$'));
+                var match = word.match(new RegExp('^([a-zA-Z0-9][a-zA-Z0-0-]*[a-zA-Z0-9]?)' + tld + '$'));
                 if (match) {
                     domains.push(match[1] + '.' + tld);
                 }
@@ -62,7 +62,7 @@ if (Meteor.isServer) {
                     domains: buildDomains(domains)
                 },
                 $push: {
-                    definition: definition
+                    definitions: definition
                 }
             });
         }
@@ -95,7 +95,7 @@ if (Meteor.isServer) {
 
         function buildIndex() {
             try {
-                Wiktionary._ensureIndex({definition: 'text'});
+                Wiktionary._ensureIndex({definitions: 1});
             }
             catch (error) {
                 console.log('Unable to create index on Wiktionary collection:',error.message);

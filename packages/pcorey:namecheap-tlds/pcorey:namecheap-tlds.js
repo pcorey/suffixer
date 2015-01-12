@@ -1,6 +1,10 @@
 NamecheapTLDs = new Meteor.Collection('namecheap_tlds');
 
 if (Meteor.isServer) {
+    Meteor.publish('namecheap_tlds', function() {
+        return NamecheapTLDs.find();
+    });
+
     Meteor.startup(function() {
 
         if (!process.env.RESET_NAMECHEAP_TLDS &&
@@ -22,4 +26,8 @@ if (Meteor.isServer) {
         });
 
     });
+}
+
+if (Meteor.isClient) {
+    Meteor.subscribe('namecheap_tlds');
 }
