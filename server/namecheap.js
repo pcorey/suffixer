@@ -44,8 +44,7 @@ function initWiktionaryNamecheapPublication() {
     function buildCheckCallback(entry, domain) {
         return Meteor.bindEnvironment(function(err, res) {
             if (err || !res || !res.DomainCheckResult || (res && res.DomainCheckResult && res.DomainCheckResult.ErrorNo)) {
-                Kadira.trackError('Namecheap.domains.check', 'Unable to check domain ' + domain.domain, res);
-                //console.log('Error checking ' + domain.domain + ':', err, res);
+                Kadira.trackError('Namecheap.domains.check', err ? err.message : res.DomainCheckResult.Description);
                 return;
             }
 
