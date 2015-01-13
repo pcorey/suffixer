@@ -33,4 +33,17 @@
     ul {
         margin: 0;
     }
+
+    .spinner {
+        width: 24px;
+        height: 24px;
+    }
+
+    .available {
+        fill: green;
+    }
+
+    .unavailable {
+        fill: red;
+    }
 }

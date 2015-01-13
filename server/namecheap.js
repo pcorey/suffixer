@@ -1,8 +1,8 @@
 function initWiktionaryNamecheapPublication() {
 
-    function entryExpired(entry) {
-        return !entry.last_checked ||
-               !moment(entry.last_checked).add(1,'hour').isAfter(moment());
+    function domainCheckExpired(domain) {
+        return !domain.last_checked ||
+               !moment(domain.last_checked).add(1,'minute').isAfter(moment());
     }
 
     function getWordRegex(word, suffix) {
@@ -41,20 +41,40 @@ function initWiktionaryNamecheapPublication() {
         };
     }
 
+    function buildCheckCallback(entry, domain) {
+        return Meteor.bindEnvironment(function(err, res) {
+            if (err || !res || !res.DomainCheckResult || (res && res.DomainCheckResult && res.DomainCheckResult.ErrorNo)) {
+                Kadira.trackError('Namecheap.domains.check', 'Unable to check domain ' + domain.domain, res);
+                //console.log('Error checking ' + domain.domain + ':', err, res);
+                return;
+            }
+
+            Wiktionary.update({
+                '_id': entry._id,
+                'domains.domain': domain.domain
+            }, {
+                $set: {
+                    'domains.$.available': res.DomainCheckResult.Available,
+                    'domains.$.last_checked': new Date()
+                }
+            });
+        })
+    }
+
+    function checkAndUpdateDomain(entry, domain) {
+        if (domainCheckExpired(domain)) {
+            Namecheap.domains.check(domain.domain, buildCheckCallback(entry, domain));
+        }
+    }
+
     Meteor.publish('wiktionary-namecheap', function(word, suffix, definition, limit) {
         var results = Wiktionary.find(
             getSelector(word, suffix, definition),
             getOptions(limit));
         _.each(results.fetch(), function(result) {
-            if (entryExpired(result)) {
-                //console.log('calling timeout for result ',result.word);
-                //Wiktionary.update(result._id, {$set: {last_checked: new Date()}});
-
-                setTimeout(Meteor.bindEnvironment(function() {
-                    //console.log('Updating result ',result.word);
-                    //Wiktionary.update(result._id, {$set: {status: 'R'}});
-                }), Math.random()*2000);
-            }
+            _.each(result.domains, function(domain) {
+                checkAndUpdateDomain(result, domain);
+            });
         });
         return results;
     });

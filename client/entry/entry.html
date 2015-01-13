@@ -4,9 +4,17 @@
             <core-item class="header" horizontal layout>
                 <em class="word" flex>{{word}}</em>
                 {{#each domains}}
-                <span><a href="https://www.namecheap.com/domains/registration/results.aspx?domain={{domain}}">{{domain}}</a></span>
+                    <span><a href="https://www.namecheap.com/domains/registration/results.aspx?domain={{domain}}">{{domain}}</a></span>
+                    {{#if showSpinner}}
+                        <paper-spinner class="spinner" role="checking" active="{{showSpinner}}"></paper-spinner>
+                    {{/if}}
+                    {{#if showAvailable}}
+                        <core-icon class="available" icon="done" currentcolor="green"></core-icon>
+                    {{/if}}
+                    {{#if showUnavailable}}
+                        <core-icon class="unavailable" icon="clear" currentcolor="red"></core-icon>
+                    {{/if}}
                 {{/each}}
-                <paper-spinner role="checking" active="true"></paper-spinner>
             </core-item>
             <div class="definitions">
                 <ul>
