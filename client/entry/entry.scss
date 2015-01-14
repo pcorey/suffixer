@@ -3,9 +3,17 @@
     margin: 10px;
     // padding: 1px 6px;
 
+    p {
+        margin: 4px 0;
+    }
+
     .header {
         margin: 0 10px;
         width: calc(100% - 20px);
+
+        & > p {
+            align-self: flex-start;
+        }
     }
 
     .item {
@@ -14,14 +22,17 @@
         // line-height: 1;
     }
 
-    .definitions {
-        padding-bottom: 10px;
-    }
-
     .word {
         display: inline-block;
         font-style: normal;
         font-weight: bold;
+    }
+
+    .definitions {
+        margin: 4px 0 0 0;
+        li {
+            white-space: normal;
+        }
     }
 
     a {
@@ -30,8 +41,38 @@
         margin-right: 10px;
     }
 
-    ul {
-        margin: 0;
+    .domains {
+        align-self: flex-start;
+    }
+
+    .domain {
+        text-align: right;
+        .spacer {
+            vertical-align: middle;
+            text-align: center;
+            display: inline-block;
+            width: 10ex;
+        }
+        a {
+            margin: 0;
+        }
+    }
+
+    .labels {
+        text-align: right;
+    }
+
+    .label {
+        display: inline-block;
+        color: #AAA;
+        font-weight: bold;
+        width: 10ex;
+        &:nth-child(1) {
+            text-align: right;
+        }
+        &:nth-child(2) {
+            text-align: center;
+        }
     }
 
     .spinner {

@@ -7,7 +7,6 @@ Template.entry.helpers({
         return buildDomain(this.word, Session.get('suffix'));
     },
     showSpinner: function() {
-        console.log('in showSpinner ',this, !this.last_checked || this.available === undefined);
         return !this.last_checked || this.available === undefined;
     },
     showAvailable: function() {

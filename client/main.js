@@ -1,10 +1,15 @@
 Session.set('suffix', '');
 Session.set('word', '');
 Session.set('definition', '');
+Session.set('limit', 20);
+Session.set('loading', false);
 
 Template.body.helpers({
     entries: function() {
         return Wiktionary.find();
+    },
+    showMoreSpinner: function() {
+        return Session.get('loading');
     }
 });
 
@@ -13,13 +18,16 @@ Template.body.events({
         Session.set('word', e.target.value);
     },
     'core-select #suffix': function(e, t) {
-        Session.set('suffix', e.originalEvent.detail.item.label);
+        Session.set('limit', 20);
+        Session.set('suffix', e.originalEvent.detail.item.innerText);
     },
     'keyup #definition': function(e, t) {
+        Session.set('limit', 20);
         Session.set('definition', e.target.value);
     },
-    'click button': function(e, t) {
-        console.log('Testy: ',Meteor.call('testy'));
+    'click .more': function(e, t) {
+        console.log('more!');
+        Session.set('limit', Session.get('limit') + 20);
     }
 });
 
@@ -32,11 +40,14 @@ Meteor.autorun(function() {
         : '';
     console.log('regex:',regex);
     
+    Session.set('loading', true);
     Meteor.subscribe('wiktionary-namecheap',
         Session.get('word'),
         Session.get('suffix'),
         Session.get('definition'),
-        20);
+        Session.get('limit'), function() {
+            Session.set('loading', false);
+        });
 });
 
 Meteor.subscribe('tlds');

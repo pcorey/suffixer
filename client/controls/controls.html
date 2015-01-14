@@ -2,14 +2,14 @@
     <div class="controls" horizontal layout>
         <paper-input id="definition" label="Meaning / definition" floatingLabel flex></paper-input>
         <!-- <paper-input id="suffix" label="Suffix / TLD" floatingLabel flex></paper-input> -->
-        <core-dropdown-menu id="suffix" label="Suffix / TLD" flex>
-            <core-dropdown class="dropdown">
-                <core-selector>
+        <paper-dropdown-menu id="suffix" label="Suffix / TLD" flex>
+            <paper-dropdown noink class="dropdown">
+                <core-menu>
                     {{#each tlds}}
-                    <core-item label="{{name}}"></core-item>
+                    <paper-item>{{name}}</paper-item>
                     {{/each}}
-                </core-selector>
-            </core-dropdown>
-        </core-dropdown-menu>
+                </core-menu>
+            </paper-dropdown>
+        </paper-dropdown-menu>
     </div>
 </template>

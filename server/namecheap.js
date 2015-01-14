@@ -36,7 +36,7 @@ function initWiktionaryNamecheapPublication() {
 
     function getOptions(limit) {
         return {
-            limit: Math.min(limit, 20),
+            limit: limit,
             sort: {word: 1}
         };
     }

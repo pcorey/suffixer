@@ -17,6 +17,16 @@ core-toolbar {
     margin: 10px 20px;
 }
 
+.more-wrapper {
+    text-align: center;
+    margin: 10px 0;
+    .more {
+        background-color: #03a9f4;
+        color: white;
+        width: calc(100% - 20px);
+    }
+}
+
 // body {
 //     font-family: Sans-Serif;
 // }
