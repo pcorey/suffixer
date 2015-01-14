@@ -1,7 +1,7 @@
 <template name="entry">
-    <paper-shadow class="entry">
-        <div class="wrapper">
-            <core-item class="header" horizontal layout>
+    <div class="row entry">
+        <div class="col-xs-12 wrapper">
+            <div class="header" horizontal layout>
                 <p flex>
                     <em class="word" flex>{{word}}</em>
                     <ul class="definitions">
@@ -32,12 +32,12 @@
                         </p>
                     {{/each}}
                 </div>
-            </core-item>
+            </div>
             <!-- <em class="word" flex>{{word}}</em>
             <span><a href="https://www.namecheap.com/domains/registration/results.aspx?domain={{formatDomain}}">{{formatDomain}}</a></span>
             <paper-spinner role="checking" active="true"></paper-spinner>
             <br>
             <span class="bottom">{{definition}}</span> -->
         </div>
-    </paper-shadow>
+    </div>
 </template>

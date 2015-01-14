@@ -1,44 +1,29 @@
 <head>
     <title>Suffixer</title>
-    <!-- Web Componenets polyfill -->
-    <script src="/components/webcomponentsjs/webcomponents.js"></script>
-    <link rel="import" href="/components/font-roboto/roboto.html">
-    <link rel="import" href="/components/core-header-panel/core-header-panel.html">
-    <link rel="import" href="/components/core-toolbar/core-toolbar.html">
-    <link rel="import" href="/components/core-menu/core-menu.html">
-    <link rel="import" href="/components/core-dropdown-menu/core-dropdown-menu.html">
-    <link rel="import" href="/components/core-selector/core-selector.html">
-    <link rel="import" href="/components/core-item/core-item.html">
-    <link rel="import" href="/components/core-label/core-label.html">
-    <link rel="import" href="/components/core-icon-button/core-icon-button.html">
-    <link rel="import" href="/components/paper-dialog/paper-action-dialog.html">
-    <link rel="import" href="/components/paper-shadow/paper-shadow.html">
-    <link rel="import" href="/components/paper-input/paper-input.html">
-    <link rel="import" href="/components/paper-item/paper-item.html">
-    <link rel="import" href="/components/paper-button/paper-button.html">
-    <link rel="import" href="/components/paper-checkbox/paper-checkbox.html">
-    <link rel="import" href="/components/paper-spinner/paper-spinner.html">
-    <link rel="import" href="/components/paper-dropdown/paper-dropdown.html">
-    <link rel="import" href="/components/paper-dropdown-menu/paper-dropdown-menu.html">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/components/flat-ui/dist/css/flat-ui.min.css">
+    <script src="/components/flat-ui/dist/js/flat-ui.min.js"></script>
+    <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-    <core-header-panel>
-        <div style="max-width: 50%; margin: 10px auto; border: 1px solid #EEE;">
-            {{> header}}
-            {{> controls}}
-            {{#if showResults}}
-                {{#each entries}}
-                    {{> entry}}
-                {{/each}}
-                <p class="more-wrapper"><paper-button class="more">More <paper-spinner class="spinner" role="checking" active="{{showMoreSpinner}}"></paper-spinner></paper-button></p>
-            {{else}}
-                <div class="instructions">
-                    <p>Suffixer can be used to help find meaningful unregistered URLs.</p>
-                    <p>To begin, start with a one-word definition or meaning of the domain you hope to find. For example, "bird" will return all possible domains related to birds.</p>
-                    <p>You can also restrict your search to a specific Top Level Domain (TLD).</p>
-                </div>
-            {{/if}}
-        </div>
-    </core-header-panel>
+    <div class="container">
+        {{> header}}
+        {{> controls}}
+        {{#if showResults}}
+            {{#each entries}}
+                {{> entry}}
+            {{/each}}
+            <p class="more-wrapper"><paper-button class="more">More <paper-spinner class="spinner" role="checking" active="{{showMoreSpinner}}"></paper-spinner></paper-button></p>
+        {{else}}
+            <div class="instructions">
+                <p>Suffixer can be used to help find meaningful unregistered URLs.</p>
+                <p>To begin, start with a one-word definition or meaning of the domain you hope to find. For example, "bird" will return all possible domains related to birds.</p>
+                <p>You can also restrict your search to a specific Top Level Domain (TLD).</p>
+            </div>
+        {{/if}}
+    </div>
 </body>

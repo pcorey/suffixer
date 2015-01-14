@@ -1,19 +1,27 @@
 <template name="controls">
-    <div class="controls" horizontal layout>
-        <paper-input id="definition" label="Meaning / definition" floatingLabel flex></paper-input>
-        <!-- <paper-input id="suffix" label="Suffix / TLD" floatingLabel flex></paper-input> -->
-        <paper-dropdown-menu id="suffix" label="Suffix / TLD" flex>
-            <paper-dropdown noink class="dropdown">
-                <core-menu>
-                    {{#each tlds}}
-                    <paper-item>{{name}}</paper-item>
-                    {{/each}}
-                </core-menu>
-            </paper-dropdown>
-        </paper-dropdown-menu>
-        <core-label>
-            <span>Hide unavailable domains?</span>
-            <paper-checkbox checked="true"></paper-checkbox>
-        </core-label>
+    <div class="row">
+        <div class="col-md-12">
+
+                <div class="form-group col-md-6">
+                    <label class="control-label sr-only" for="definition">Meaning/Definition</label>
+                    <input type="text" id="definition" name="definition" class="form-control" placeholder="Meaning/Definition" />
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label class="control-label sr-only" for="suffix">Top Level Domain</label>
+                    <select id="suffix" name="suffix" class="form-control select-primary select-block">
+                        <option value="">All TLDs</option>
+                        {{#each tlds}}
+                            <option value="{{name}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                
+                <div class="form-group col-md-4">
+                    <label class="control-label" for="show-registered">Show Registered Domains?</label>
+                    <input type="checkbox" checked data-toggle="switch" name="show-registered" data-on-text="YES" data-off-text="NO" id="show-registered" />
+                </div>
+
+        </div>
     </div>
 </template>
