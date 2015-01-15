@@ -1,0 +1,21 @@
+<template name="entriesWrapper">
+    <div class="entriesWrapper">
+        {{#momentum plugin='fade'}}
+            {{#if showResults}}
+                {{#each entries}}
+                    {{> entry}}
+                {{/each}}
+                <button class="more-buttom button button-blue">More</button>
+                <!-- {{#if loading}}
+                    {{#filler}}
+                        <div class="sk-spinner sk-spinner-pulse"></div>
+                    {{/filler}}
+                {{/if}} -->
+            {{else}}
+                {{#filler}}
+                    {{> instructions}}
+                {{/filler}}
+            {{/if}}
+        {{/momentum}}
+    </div>
+</template>

@@ -4,35 +4,6 @@ Session.set('definition', '');
 Session.set('limit', 20);
 Session.set('loading', false);
 
-Template.body.helpers({
-    entries: function() {
-        return Wiktionary.find();
-    },
-    showMoreSpinner: function() {
-        return Session.get('loading');
-    },
-    showResults: function() {
-        return true;//Session.get('definition') || Session.get('suffix');
-    }
-});
-
-Template.body.events({
-    'keyup #word': function(e, t) {
-        Session.set('word', e.target.value);
-    },
-    'change #suffix': function(e, t) {
-        Session.set('limit', 20);
-        Session.set('suffix', e.currentTarget.value);
-    },
-    'keyup #definition': function(e, t) {
-        Session.set('limit', 20);
-        Session.set('definition', e.target.value);
-    },
-    'click .more-buttom': function(e, t) {
-        Session.set('limit', Session.get('limit') + 20);
-    }
-});
-
 Meteor.autorun(function() {
     var regex = Session.get('word')
         ? ('.*?'+Session.get('word')+'.*?'+Session.get('suffix')+'$')
@@ -54,17 +25,5 @@ Meteor.autorun(function() {
 
 Meteor.subscribe('tlds');
 
-// Meteor.autorun(function() {
-//     var results = Wiktionary.find({}, {
-//         transform: function(entry) {
-//             return new Domain(entry, Session.get('suffix'));
-//         }
-//     }).fetch();
-//     console.log('rerunning...', results);
-// });
-
 //TODO: Move to full text seach mongo instance:
 //http://www.meteorpedia.com/read/Fulltext_search
-
-//TODO: Hook up namecheap API:
-//https://www.namecheap.com/support/api/methods/domains/check.aspx
