@@ -1,7 +1,17 @@
-.header-bar {
-    background-color: tomato;
+.header {
+    background-color: #3fb6f2;
     color: white;
+    padding: 10px;
+
     p, h1 {
         display: inline-block;
+    }
+    h1 {
+        font-weight: bold;
+        font-size: 4em;
+        line-height: 1;
+    }
+    p {
+        margin-left: 10px;
     }
 }

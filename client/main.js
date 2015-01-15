@@ -12,7 +12,7 @@ Template.body.helpers({
         return Session.get('loading');
     },
     showResults: function() {
-        return Session.get('definition') || Session.get('suffix');
+        return true;//Session.get('definition') || Session.get('suffix');
     }
 });
 
@@ -20,16 +20,16 @@ Template.body.events({
     'keyup #word': function(e, t) {
         Session.set('word', e.target.value);
     },
-    'core-select #suffix': function(e, t) {
+    'change #suffix': function(e, t) {
         Session.set('limit', 20);
+        console.log(e, t);
         Session.set('suffix', e.originalEvent.detail.item.innerText);
     },
     'keyup #definition': function(e, t) {
         Session.set('limit', 20);
         Session.set('definition', e.target.value);
     },
-    'click .more': function(e, t) {
-        console.log('more!');
+    'click .more-buttom': function(e, t) {
         Session.set('limit', Session.get('limit') + 20);
     }
 });

@@ -1,29 +1,23 @@
 <head>
     <title>Suffixer</title>
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/components/flat-ui/dist/css/flat-ui.min.css">
-    <script src="/components/flat-ui/dist/js/flat-ui.min.js"></script>
-    <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
-    <div class="container">
-        {{> header}}
-        {{> controls}}
-        {{#if showResults}}
-            {{#each entries}}
-                {{> entry}}
-            {{/each}}
-            <p class="more-wrapper"><paper-button class="more">More <paper-spinner class="spinner" role="checking" active="{{showMoreSpinner}}"></paper-spinner></paper-button></p>
-        {{else}}
-            <div class="instructions">
-                <p>Suffixer can be used to help find meaningful unregistered URLs.</p>
-                <p>To begin, start with a one-word definition or meaning of the domain you hope to find. For example, "bird" will return all possible domains related to birds.</p>
-                <p>You can also restrict your search to a specific Top Level Domain (TLD).</p>
-            </div>
-        {{/if}}
-    </div>
+    {{> header}}
+    {{> controls}}
+    {{#if showResults}}
+        {{#each entries}}
+            {{> entry}}
+        {{/each}}
+        <!-- <p class="more-wrapper"><paper-button class="more">More <paper-spinner class="spinner" role="checking" active="{{showMoreSpinner}}"></paper-spinner></paper-button></p> -->
+        <button class="more-buttom button button-blue">More</button>
+    {{else}}
+        <div class="instructions">
+            <p>Suffixer can be used to help find meaningful unregistered URLs.</p>
+            <p>To begin, start with a one-word definition or meaning of the domain you hope to find. For example, "bird" will return all possible domains related to birds.</p>
+            <p>You can also restrict your search to a specific Top Level Domain (TLD).</p>
+        </div>
+    {{/if}}
 </body>

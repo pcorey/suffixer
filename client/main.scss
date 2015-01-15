@@ -1,32 +1,22 @@
-html,body {
-  height: 100%;
-  margin: 0;
-  font-family: 'RobotoDraft', sans-serif;
-}
-core-header-panel {
-  height: 100%;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-}
-core-toolbar {
-  background: #03a9f4;
-  color: white;
-}
+@import "flat-ui";
+@import "border-box";
+@import "fonts";
 
-.item {
-    margin: 10px 20px;
-}
 
-.more-wrapper {
-    text-align: center;
-    margin: 10px 0;
-    .more {
-        background-color: #03a9f4;
-        color: white;
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    margin: 20px auto;
+    width: 1024px;
+    border: 1px solid #aaa;
+
+    @media (max-width: 1064px) {
+        margin: 20px 10px;
+        width: calc(100% - 20px);
+    }
+
+    .more-buttom {
+        margin: 0 10px 10px 10px;
         width: calc(100% - 20px);
     }
 }
-
-// body {
-//     font-family: Sans-Serif;
-// }

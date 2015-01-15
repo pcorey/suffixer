@@ -1,43 +1,71 @@
 <template name="entry">
-    <div class="row entry">
-        <div class="col-xs-12 wrapper">
-            <div class="header" horizontal layout>
-                <p flex>
-                    <em class="word" flex>{{word}}</em>
-                    <ul class="definitions">
-                        {{#each definition}}
-                        <li>{{this}}</li>
-                        {{/each}}
-                    </ul>
-                </p>
-                <div class="domains">
-                    <p class="labels">
-                        <span class="label">Domain</span>
-                        <span class="label">Available</span>
-                    </p>
-                    {{#each domains}}
-                        <p class="domain">
-                            <a href="https://www.namecheap.com/domains/registration/results.aspx?domain={{domain}}">{{domain}}</a>
-                            <span class="spacer">
-                                {{#if showSpinner}}
-                                    <paper-spinner class="spinner" role="checking" active="{{showSpinner}}"></paper-spinner>
-                                {{/if}}
-                                {{#if showAvailable}}
-                                    <core-icon class="available" icon="done" currentcolor="green"></core-icon>
-                                {{/if}}
-                                {{#if showUnavailable}}
-                                    <core-icon class="unavailable" icon="clear" currentcolor="red"></core-icon>
-                                {{/if}}
-                            </span>
-                        </p>
-                    {{/each}}
-                </div>
-            </div>
-            <!-- <em class="word" flex>{{word}}</em>
-            <span><a href="https://www.namecheap.com/domains/registration/results.aspx?domain={{formatDomain}}">{{formatDomain}}</a></span>
-            <paper-spinner role="checking" active="true"></paper-spinner>
-            <br>
-            <span class="bottom">{{definition}}</span> -->
+    <div class="entry">
+        <div class="word-wrapper">
+            <p class="word">{{word}}</p>
+            <ul class="definitions">
+                {{#each definition}}
+                <li>{{this}}</li>
+                {{/each}}
+            </ul>
         </div>
+
+        <div class="domain-wrapper">
+            <p class="labels">
+                <span>Domain</span>
+                <span>Available</span>
+            </p>
+            <ul class="domains">
+                {{#each domains}}
+                    <li class="domain">
+                        <a class="link" href="https://www.namecheap.com/domains/registration/results.aspx?domain={{domain}}">{{domain}}</a>
+                        <span class="status">
+                            {{#if showSpinner}}
+                                <span class="icon-dash"></span>
+                            {{/if}}
+                            {{#if showAvailable}}
+                                <span class="icon-check"></span>
+                            {{/if}}
+                            {{#if showUnavailable}}
+                                <span class="icon-x"></span>
+                            {{/if}}
+                        </span>
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+
+
+        <!-- <div class="entry-header" horizontal layout>
+            <p flex>
+                <em class="word" flex>{{word}}</em>
+                <ul class="definitions">
+                    {{#each definition}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+            </p>
+            <div class="domains">
+                <p class="labels">
+                    <span class="label">Domain</span>
+                    <span class="label">Available</span>
+                </p>
+                {{#each domains}}
+                    <p class="domain">
+                        <a href="https://www.namecheap.com/domains/registration/results.aspx?domain={{domain}}">{{domain}}</a>
+                        <span class="spacer">
+                            {{#if showSpinner}}
+                                <paper-spinner class="spinner" role="checking" active="{{showSpinner}}"></paper-spinner>
+                            {{/if}}
+                            {{#if showAvailable}}
+                                <core-icon class="available" icon="done" currentcolor="green"></core-icon>
+                            {{/if}}
+                            {{#if showUnavailable}}
+                                <core-icon class="unavailable" icon="clear" currentcolor="red"></core-icon>
+                            {{/if}}
+                        </span>
+                    </p>
+                {{/each}}
+            </div>
+        </div> -->
     </div>
 </template>

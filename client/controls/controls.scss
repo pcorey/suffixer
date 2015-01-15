@@ -1,0 +1,38 @@
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    //padding: 10px;
+
+    #definition, .select, .switch-wrapper {
+        margin: 10px;
+    }
+
+    #definition {
+        min-width: 200px;
+        flex-grow: 1;
+
+        @media (max-width: 680px) {
+            width: 100%;
+        }
+    }
+
+    .select {
+        width: 150px;
+        vertical-align: middle;
+
+        @media (max-width: 680px) {
+            flex-grow: 1;
+        }
+    }
+
+    .switch-label {
+        vertical-align: middle;
+        font-weight: bold;
+    }
+
+    .switch {
+        vertical-align: middle;
+    }
+}

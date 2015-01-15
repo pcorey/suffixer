@@ -1,90 +1,154 @@
 .entry {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
 
     margin: 10px;
-    // padding: 1px 6px;
+    padding: 10px;
+    box-shadow: 1px 2px 8px rgba(0,0,0, 0.5);
 
-    p {
-        margin: 4px 0;
-    }
-
-    .header {
-        margin: 0 10px;
-        width: calc(100% - 20px);
-
-        & > p {
-            align-self: flex-start;
+    .word-wrapper {
+        flex-grow: 1;
+        .word {
+            font-weight: bold;
+        }
+        ul {
+            list-style: disc;
+            padding: 0 0 0 40px;
         }
     }
 
-    .item {
-        // margin: 0;
-        // min-height: 0;
-        // line-height: 1;
-    }
-
-    .word {
-        display: inline-block;
-        font-style: normal;
-        font-weight: bold;
-    }
-
-    .definitions {
-        margin: 4px 0 0 0;
-        li {
-            white-space: normal;
-        }
-    }
-
-    a {
-        text-decoration: none;
-        color: #03a9f4;
-        margin-right: 10px;
-    }
-
-    .domains {
-        align-self: flex-start;
-    }
-
-    .domain {
-        text-align: right;
-        .spacer {
-            vertical-align: middle;
-            text-align: center;
-            display: inline-block;
-            width: 10ex;
-        }
-        a {
-            margin: 0;
-        }
-    }
-
-    .labels {
-        text-align: right;
-    }
-
-    .label {
-        display: inline-block;
-        color: #AAA;
-        font-weight: bold;
-        width: 10ex;
-        &:nth-child(1) {
+    .domain-wrapper {
+        white-space: nowrap;
+        .labels {
+            color: #AAA;
+            font-weight: bold;
             text-align: right;
+            span:nth-child(1) {
+                text-align: right;
+            }
+            span:nth-child(2) {
+                display: inline-block;
+                text-align: center;
+                width: 100px;
+            }
         }
-        &:nth-child(2) {
-            text-align: center;
+        
+        .domain {
+            text-align: right;
+            .link {
+                text-align: right;
+            }
+            .status {
+                display: inline-block;
+                text-align: center;
+                width: 100px;
+                vertical-align: middle;
+                .icon-dash, .icon-check, .icon-x {
+                    font-size: 24px;
+                }
+                .icon-dash {
+                    color: orange;
+                }
+                .icon-check {
+                    color: green;
+                }
+                .icon-x {
+                    color: red;
+                }
+            }
         }
-    }
-
-    .spinner {
-        width: 24px;
-        height: 24px;
-    }
-
-    .available {
-        fill: green;
-    }
-
-    .unavailable {
-        fill: red;
     }
 }
+
+// .entry {
+
+//     margin: 10px;
+//     // padding: 1px 6px;
+
+//     p {
+//         margin: 4px 0;
+//     }
+
+//     .entry-header {
+//         margin: 0 10px;
+//         width: calc(100% - 20px);
+
+//         & > p {
+//             align-self: flex-start;
+//         }
+//     }
+
+//     .item {
+//         // margin: 0;
+//         // min-height: 0;
+//         // line-height: 1;
+//     }
+
+//     .word {
+//         display: inline-block;
+//         font-style: normal;
+//         font-weight: bold;
+//     }
+
+//     .definitions {
+//         margin: 4px 0 0 0;
+//         li {
+//             white-space: normal;
+//         }
+//     }
+
+//     a {
+//         text-decoration: none;
+//         color: #03a9f4;
+//         margin-right: 10px;
+//     }
+
+//     .domains {
+//         align-self: flex-start;
+//     }
+
+//     .domain {
+//         text-align: right;
+//         .spacer {
+//             vertical-align: middle;
+//             text-align: center;
+//             display: inline-block;
+//             width: 10ex;
+//         }
+//         a {
+//             margin: 0;
+//         }
+//     }
+
+//     .labels {
+//         text-align: right;
+//     }
+
+//     .label {
+//         display: inline-block;
+//         color: #AAA;
+//         font-weight: bold;
+//         width: 10ex;
+//         &:nth-child(1) {
+//             text-align: right;
+//         }
+//         &:nth-child(2) {
+//             text-align: center;
+//         }
+//     }
+
+//     .spinner {
+//         width: 24px;
+//         height: 24px;
+//     }
+
+//     .available {
+//         fill: green;
+//     }
+
+//     .unavailable {
+//         fill: red;
+//     }
+// }
