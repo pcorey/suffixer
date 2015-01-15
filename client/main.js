@@ -22,8 +22,7 @@ Template.body.events({
     },
     'change #suffix': function(e, t) {
         Session.set('limit', 20);
-        console.log(e, t);
-        Session.set('suffix', e.originalEvent.detail.item.innerText);
+        Session.set('suffix', e.currentTarget.value);
     },
     'keyup #definition': function(e, t) {
         Session.set('limit', 20);
