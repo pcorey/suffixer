@@ -1,10 +1,12 @@
 @import "flat-ui";
 @import "border-box";
 @import "fonts";
+@import "animations";
+@import "../public/components/spinkit/scss/spinners/5-pulse";
 
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto';
     font-size: 16px;
     margin: 20px auto;
     width: 1024px;

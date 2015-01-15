@@ -8,6 +8,10 @@
     padding: 10px;
     box-shadow: 1px 2px 8px rgba(0,0,0, 0.5);
 
+    &:nth-child(odd) {
+        background-color: #F0F0F0;
+    }
+
     .word-wrapper {
         flex-grow: 1;
         .word {
@@ -35,8 +39,15 @@
             }
         }
         
+        .domains {
+            display: inline-block;
+            width: 100%;
+            text-align: right;
+        }
+
         .domain {
             text-align: right;
+            display: block;
             .link {
                 text-align: right;
             }
@@ -56,6 +67,11 @@
                 }
                 .icon-x {
                     color: red;
+                }
+                .spinner {
+                    width: 24px;
+                    height: 24px;
+                    background-color: orange;
                 }
             }
         }

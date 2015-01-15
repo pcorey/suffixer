@@ -12,7 +12,8 @@
     "test",
     "tests"
   ],
-  "dependencies": {},
-  "devDependencies": {
-  }
+  "dependencies": {
+    "spinkit": "~1.0.1"
+  },
+  "devDependencies": {}
 }
