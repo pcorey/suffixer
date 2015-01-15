@@ -1,5 +1,5 @@
 .entry {
-    display: flex;
+    //display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: flex-start;
@@ -24,6 +24,8 @@
     }
 
     .domain-wrapper {
+        float: right;
+        margin-left: 10px;
         white-space: nowrap;
         .labels {
             color: #AAA;

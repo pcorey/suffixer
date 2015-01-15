@@ -1,13 +1,5 @@
 <template name="entry">
     <div class="entry">
-        <div class="word-wrapper">
-            <p class="word">{{word}}</p>
-            <ul class="definitions">
-                {{#each definition}}
-                <li>{{this}}</li>
-                {{/each}}
-            </ul>
-        </div>
 
         <div class="domain-wrapper">
             <p class="labels">
@@ -31,6 +23,15 @@
                             {{/if}}
                         </span>
                     </li>
+                {{/each}}
+            </ul>
+        </div>
+
+        <div class="word-wrapper">
+            <p class="word">{{word}}</p>
+            <ul class="definitions">
+                {{#each definition}}
+                <li>{{this}}</li>
                 {{/each}}
             </ul>
         </div>
