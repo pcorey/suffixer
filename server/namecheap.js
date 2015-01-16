@@ -44,40 +44,61 @@ function initWiktionaryNamecheapPublication() {
         };
     }
 
-    function buildCheckCallback(entry, domain) {
+    function buildCheckCallback(domainMap) {
         return Meteor.bindEnvironment(function(err, res) {
-            if (err || !res || !res.DomainCheckResult || (res && res.DomainCheckResult && res.DomainCheckResult.ErrorNo)) {
-                Kadira.trackError('Namecheap.domains.check', err ? err.message : res.DomainCheckResult.Description);
+            if (err) {
+                console.log('err', err);
+                Kadira.trackError('Namecheap.domains.check', err.message);
                 return;
             }
-
-            Wiktionary.update({
-                '_id': entry._id,
-                'domains.domain': domain.domain
-            }, {
-                $set: {
-                    'domains.$.available': res.DomainCheckResult.Available,
-                    'domains.$.last_checked': new Date()
+            if (!res.DomainCheckResult) {
+                console.log('no checkresult', res);
+                Kadira.trackError('Namecheap.domains.check', JSON.stringify(res));
+                return;
+            }
+            res.DomainCheckResult.map(function(result) {
+                if (result.ErrorNo) {
+                    Kadira.trackError('Namecheap.domains.check', JSON.stringify(result));
+                    return;
                 }
+                var id = domainMap[result.Domain];
+                Wiktionary.update({
+                    '_id': id,
+                    'domains.domain': result.Domain
+                }, {
+                    $set: {
+                        'domains.$.available': result.Available,
+                        'domains.$.last_checked': new Date()
+                    }
+                });
             });
         })
     }
 
-    function checkAndUpdateDomain(entry, domain) {
-        if (domainCheckExpired(domain)) {
-            Namecheap.domains.check(domain.domain, buildCheckCallback(entry, domain));
+    function getDomainMap(results) {
+        var map = {
+            domains: [],
+            map: {}
         }
+        results.fetch().map(function(result) {
+            result.domains.filter(domainCheckExpired).map(function(domain) {
+                map.domains.push(domain.domain);
+                map.map[domain.domain] = result._id;
+            });
+        });
+        return map;
+    }
+
+    function checkAndUpdateDomains(domainMap) {
+        Namecheap.domains.check(domainMap.domains, buildCheckCallback(domainMap.map));
     }
 
     Meteor.publish('wiktionary-namecheap', function(word, suffix, definition, limit, hideRegistered) {
         var results = Wiktionary.find(
             getSelector(word, suffix, definition, hideRegistered),
             getOptions(limit));
-        _.each(results.fetch(), function(result) {
-            _.each(result.domains, function(domain) {
-                checkAndUpdateDomain(result, domain);
-            });
-        });
+        var domainMap = getDomainMap(results);
+        checkAndUpdateDomains(domainMap);
         return results;
     });
 
