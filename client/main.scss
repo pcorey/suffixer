@@ -2,7 +2,7 @@
 @import "border-box";
 @import "fonts";
 @import "animations";
-@import "../public/components/spinkit/scss/spinners/5-pulse";
+@import "../public/components/spinkit/scss/spinners/6-chasing-dots";
 
 
 body {
@@ -23,4 +23,6 @@ body {
         margin: 0 10px 10px 10px;
         width: calc(100% - 20px);
     }
+
+    overflow-y: scroll;
 }

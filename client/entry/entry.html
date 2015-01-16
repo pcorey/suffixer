@@ -1,5 +1,5 @@
 <template name="entry">
-    <div class="entry">
+    <div class="entry fade">
 
         <div class="domain-wrapper">
             <p class="labels">
@@ -13,7 +13,10 @@
                         <span class="status">
                             {{#if showSpinner}}
                                 <!-- <span class="icon-dash"></span> -->
-                                <div class="spinner sk-spinner sk-spinner-pulse"></div>
+                                <div class="spinner sk-spinner sk-spinner-chasing-dots">
+                                    <div class="sk-dot1"></div>
+                                    <div class="sk-dot2"></div>
+                                </div>
                             {{/if}}
                             {{#if showAvailable}}
                                 <span class="icon-check"></span>

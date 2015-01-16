@@ -73,7 +73,9 @@
                 .spinner {
                     width: 24px;
                     height: 24px;
-                    background-color: orange;
+                    & > * {
+                        background-color: orange;
+                    }
                 }
             }
         }

@@ -1,5 +1,5 @@
 Template.header.events({
-    'click .info-button': function(e) {
-        e.target.nextElementSibling.toggle();
+    'click .info': function() {
+        Session.set('showHelp', !Session.get('showHelp'));
     }
 })

@@ -10,6 +10,9 @@ Template.entriesWrapper.helpers({
     },
     showResults: function() {
         return Session.get('definition') || Session.get('suffix');
+    },
+    showHelp: function() {
+        return Session.get('showHelp');
     }
 });
 

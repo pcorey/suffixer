@@ -1,4 +1,6 @@
 .header {
+    display: flex;
+    align-items: flex-end;
     background-color: #3fb6f2;
     color: white;
     padding: 10px;
@@ -7,16 +9,35 @@
     border-top-right-radius: 4px;
     border-bottom: 5px solid #F0F0F0;
 
-    p, h1 {
+    p, h1, .info {
         display: inline-block;
-        text-shadow: 1px -1px 0px rgba(0,0,0,0.2);
+        text-shadow: 1px 1px 0px rgba(0,0,0,0.2);
     }
     h1 {
         font-weight: bold;
         font-size: 4em;
         line-height: 1;
+        @media (max-width: 370px) {
+            font-size: 3em;
+        }
     }
     p {
-        margin-left: 10px;
+        margin: 0 0 5px 10px;
+        @media (max-width: 650px) {
+            display: none;
+        }
+    }
+
+    .info {
+        font-size: 2em;
+        line-height: 2;
+        margin-right: 10px;
+        cursor: pointer;
+        flex-grow: 1;
+        text-align: right;
+
+        @media (max-width: 370px) {
+            font-size: 1.5em;
+        }
     }
 }

@@ -3,6 +3,9 @@ Session.set('word', '');
 Session.set('definition', '');
 Session.set('limit', 20);
 Session.set('loading', false);
+Session.set('showHelp', true);
+
+wiktionaryNamecheapSubscribe = _.throttle(Meteor.subscribe, 250, {leading: true, trailing: true});
 
 Meteor.autorun(function() {
     var regex = Session.get('word')
@@ -11,14 +14,15 @@ Meteor.autorun(function() {
     var definitionRegex = Session.get('definition')
         ? ('.*?'+Session.get('definition')+'.*?')
         : '';
-    console.log('regex:',regex);
-    
     Session.set('loading', true);
+
     Meteor.subscribe('wiktionary-namecheap',
         Session.get('word'),
         Session.get('suffix'),
         Session.get('definition'),
-        Session.get('limit'), function() {
+        Session.get('limit'),
+        Session.get('hideRegistered'),
+        function() {
             Session.set('loading', false);
         });
 });

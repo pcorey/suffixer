@@ -6,13 +6,6 @@ function initWiktionaryNamecheapPublication() {
     }
 
     function getWordRegex(word, suffix) {
-        // var regex = Session.get('word')
-        //     ? ('.*?'+Session.get('word')+'.*?'+Session.get('suffix')+'$')
-        //     : (Session.get('suffix')+'$');
-        // var definitionRegex = Session.get('definition')
-        //     ? ('.*?'+Session.get('definition')+'.*?')
-        //     : '';
-        // console.log('regex:',regex);
         suffix = suffix ? suffix.replace(/\./g, '') : '';
         if (word) {
             return '.+' + word + '.*?' + suffix + '$';
@@ -27,11 +20,21 @@ function initWiktionaryNamecheapPublication() {
         return '';
     }
 
-    function getSelector(word, suffix, definition) {
-        return {
+    function getSelector(word, suffix, definition, hideRegistered) {
+        var selector = {
             word: {$regex: getWordRegex(word, suffix), $options: 'i'},
             definition: {$regex: getDefinitionRegex(definition), $options: 'i'}
         };
+
+        if (hideRegistered) {
+            selector.domains = {
+                $elemMatch: {
+                    available: true
+                }
+            };
+        }
+
+        return selector;
     }
 
     function getOptions(limit) {
@@ -66,9 +69,9 @@ function initWiktionaryNamecheapPublication() {
         }
     }
 
-    Meteor.publish('wiktionary-namecheap', function(word, suffix, definition, limit) {
+    Meteor.publish('wiktionary-namecheap', function(word, suffix, definition, limit, hideRegistered) {
         var results = Wiktionary.find(
-            getSelector(word, suffix, definition),
+            getSelector(word, suffix, definition, hideRegistered),
             getOptions(limit));
         _.each(results.fetch(), function(result) {
             _.each(result.domains, function(domain) {

@@ -1,5 +1,5 @@
 <template name="filler">
-    <div class="filler">
+    <div class="filler {{#if showResults}}{{else}}no-results{{/if}}">
         {{> Template.contentBlock}}
     </div>
 </template>
