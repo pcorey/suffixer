@@ -1,6 +1,8 @@
 <template name="instructions">
     <div class="instructions">
-        <span class="close icon-x"></span>
+        {{#if showX}}
+            <span class="close icon-x"></span>
+        {{/if}}
         <h2>What is Suffixer?</h2>
         <p>Suffixer is a tool designed to find meaningful, unregistered URLs.</p>
         <p>You can get started by entering a word related to your project in the box above. Suffixer will show a list of related words suffixed with Top Level Domains. It will also show you if that domain is available for registration.</p>

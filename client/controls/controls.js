@@ -2,7 +2,6 @@ Template.controls.events({
     'change #suffix': function(e, t) {
         Session.set('limit', 20);
         Session.set('suffix', e.currentTarget.value);
-        Session.set('showHelp', !e.currentTarget.value);
     },
     'keyup #definition': function(e, t) {
         Session.set('limit', 20);
