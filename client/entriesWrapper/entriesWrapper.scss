@@ -1,4 +1,28 @@
 .entriesWrapper {
     position: relative;
     min-height: calc(100vh - 200px);
+
+    .more-wrapper {
+        width: calc(100% - 20px);
+        .more-buttom {
+            line-height: 28px;
+            font-size: 16px;
+            margin: 0 10px 10px 10px;
+            width: 100%;
+        }
+        .spinner {
+            float: right;
+            opacity: 0;
+            transition: all 0.2s ease-in-out;
+            width: 24px;
+            height: 24px;
+            padding: 2px;
+            &.loading {
+                opacity: 1;
+            }
+            & > * {
+                background-color: white;
+            }
+        }
+    }
 }

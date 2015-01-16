@@ -11,7 +11,13 @@
             {{#each entries}}
                 {{> entry}}
             {{/each}}
-            <button class="more-buttom button button-blue">More</button>
+            <div class="more-wrapper">
+                <button class="more-buttom button button-blue">More<div class="spinner sk-spinner sk-spinner-chasing-dots {{#if loading}}loading{{/if}}">
+                    <div class="sk-dot1"></div>
+                    <div class="sk-dot2"></div>
+                </div></button>
+                
+            </div>
         {{/if}}
     </div>
 </template>
