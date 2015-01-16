@@ -8,16 +8,24 @@
             {{/if}}
         {{/momentum}}
         {{#if showResults}}
-            {{#each entries}}
-                {{> entry}}
-            {{/each}}
-            <div class="more-wrapper">
-                <button class="more-buttom button button-blue">More<div class="spinner sk-spinner sk-spinner-chasing-dots {{#if loading}}loading{{/if}}">
-                    <div class="sk-dot1"></div>
-                    <div class="sk-dot2"></div>
-                </div></button>
-                
-            </div>
+            {{#if resultsExist entries}}
+                {{#each entries}}
+                    {{> entry}}
+                {{/each}}
+                <div class="more-wrapper">
+                    <button class="more-buttom button button-blue">More<div class="spinner sk-spinner sk-spinner-chasing-dots {{#if loading}}loading{{/if}}">
+                        <div class="sk-dot1"></div>
+                        <div class="sk-dot2"></div>
+                    </div></button>
+                </div>
+            {{/if}}
+            {{#momentum plugin="fade"}}
+                {{#if showNoResults entries}}
+                    {{#filler showResults=showResults}}
+                        {{> noResults}}
+                    {{/filler}}
+                {{/if}}
+            {{/momentum}}
         {{/if}}
     </div>
 </template>

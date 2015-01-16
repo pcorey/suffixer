@@ -9,10 +9,16 @@ Template.entriesWrapper.helpers({
         return Session.get('loading');
     },
     showResults: function() {
-        return Session.get('definition') || Session.get('suffix');
+        return Session.get('definition');
     },
     showHelp: function() {
         return Session.get('showHelp');
+    },
+    resultsExist: function(entries) {
+        return entries.count();
+    },
+    showNoResults: function(entries) {
+        return !entries.count() && !Session.get('showHelp');
     }
 });
 
