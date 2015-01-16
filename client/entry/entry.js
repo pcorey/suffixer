@@ -14,6 +14,8 @@ Template.entry.helpers({
     },
     showUnavailable: function() {
         return this.available === false;
+    },
+    highlight: function (definition, word) {
+        return Spacebars.SafeString(definition.replace(new RegExp('('+Session.get('definition')+')', 'gi'), '<em>$1</em>'));
     }
-
 });
