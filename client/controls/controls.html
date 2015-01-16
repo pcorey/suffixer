@@ -1,7 +1,13 @@
 <template name="controls">
     <div class="controls">
 
-        <input type="text" id="definition" placeholder="Meaning/Definition" />
+        <div class="input-wrapper">
+            <input type="text" id="definition" placeholder="Meaning/Definition" />
+            <div class="spinner sk-spinner sk-spinner-chasing-dots {{#if loading}}loading{{/if}}">
+                <div class="sk-dot1"></div>
+                <div class="sk-dot2"></div>
+            </div>
+        </div>
 
         <div class="select">
             <select id="suffix" class="form-control select-primary select-block">

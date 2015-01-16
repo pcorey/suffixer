@@ -21,5 +21,8 @@ Template.controls.helpers({
     },
     showRegistered: function() {
         return Session.get('hideRegistered');
+    },
+    loading: function() {
+        return Session.get('loading');
     }
 });

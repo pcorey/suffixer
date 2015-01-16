@@ -6,12 +6,12 @@
     border-bottom: 5px solid #F0F0F0;
     //padding: 10px;
 
-    #definition, .select, .switch-wrapper {
+    .input-wrapper, .select, .switch-wrapper {
         margin: 10px;
     }
 
-    #definition {
-        min-width: 200px;
+    .input-wrapper {
+        min-width: 300px;
         flex-grow: 1;
 
         @media (max-width: 680px) {
@@ -35,5 +35,29 @@
 
     .switch {
         vertical-align: middle;
+    }
+
+    .input-wrapper {
+        position: relative;
+
+        #definition {
+            width: 100%;
+        }
+        .spinner {
+            opacity: 0;
+            width: 24px;
+            height: 24px;
+            position: absolute;
+            right: 7px;
+            top: 3px;
+            & > * {
+                background-color: #F0F0F0;
+            }
+
+            transition: all 0.2s ease-in-out;
+            &.loading {
+                opacity: 1;
+            }
+        }
     }
 }

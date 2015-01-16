@@ -1,6 +1,15 @@
 <template name="entry">
     <div class="entry fade">
 
+        <div class="word-wrapper">
+            <p class="word">{{word}}</p>
+            <ul class="definitions">
+                {{#each definition}}
+                <li>{{this}}</li>
+                {{/each}}
+            </ul>
+        </div>
+
         <div class="domain-wrapper">
             <p class="labels">
                 <span>Domain</span>
@@ -29,16 +38,6 @@
                 {{/each}}
             </ul>
         </div>
-
-        <div class="word-wrapper">
-            <p class="word">{{word}}</p>
-            <ul class="definitions">
-                {{#each definition}}
-                <li>{{this}}</li>
-                {{/each}}
-            </ul>
-        </div>
-
 
         <!-- <div class="entry-header" horizontal layout>
             <p flex>
