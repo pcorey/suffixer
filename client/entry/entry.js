@@ -19,6 +19,6 @@ Template.entry.helpers({
         return Spacebars.SafeString(definition.replace(new RegExp('('+Session.get('definition')+')', 'gi'), '<em>$1</em>'));
     },
     affiliateId: function() {
-        return Meteor.settings.namecheap.affiliate_id;
+        return Meteor.settings.public.namecheap.affiliate_id;
     }
 });
