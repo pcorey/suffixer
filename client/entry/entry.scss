@@ -1,6 +1,7 @@
 .entry {
     display: flex;
     flex-wrap: nowrap;
+    flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
 
@@ -14,6 +15,7 @@
 
     .word-wrapper {
         flex: 1;
+        max-width: 100%;
         .word {
             font-weight: bold;
         }
@@ -24,16 +26,24 @@
         em {
             border-bottom: 2px solid #3fb6f2;
         }
+
+        @media (max-width: 800px) {
+            margin-bottom: 5px;
+            padding-bottom: 5px;
+            border-bottom: 2px dashed #AAA;
+        }
     }
 
     .domain-wrapper {
         float: right;
         margin-left: 10px;
         white-space: nowrap;
+
         .labels {
             color: #AAA;
             font-weight: bold;
             text-align: right;
+
             span:nth-child(1) {
                 text-align: right;
             }
@@ -41,6 +51,15 @@
                 display: inline-block;
                 text-align: center;
                 width: 100px;
+            }
+
+            @media (max-width: 800px) {
+                display: flex;
+                text-align: left;
+                span:nth-child(1) {
+                    flex: 1;
+                    text-align: left;
+                }
             }
         }
         
@@ -53,6 +72,7 @@
         .domain {
             text-align: right;
             display: block;
+
             .link {
                 text-align: right;
             }
@@ -82,6 +102,24 @@
                     }
                 }
             }
+
+            @media (max-width: 800px) {
+                display: flex;
+                text-align: right;
+
+                .link {
+                    flex: 1;
+                    text-align: left;
+                }
+            }
         }
+
+        @media (max-width: 800px) {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 800px) {
+        flex-direction: column;
     }
 }

@@ -9,7 +9,6 @@ Template.controls.events({
         Session.set('showHelp', !e.target.value);
     },
     'change #hide-registered': function(e, t) {
-        console.log('event handler');
         Session.set('hideRegistered', !Session.get('hideRegistered'));
     }
 });
