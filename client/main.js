@@ -5,8 +5,6 @@ Session.set('limit', 20);
 Session.set('loading', false);
 Session.set('showHelp', true);
 
-wiktionaryNamecheapSubscribe = _.throttle(Meteor.subscribe, 250, {leading: true, trailing: true});
-
 Meteor.autorun(function() {
     var regex = Session.get('word')
         ? ('.*?'+Session.get('word')+'.*?'+Session.get('suffix')+'$')
