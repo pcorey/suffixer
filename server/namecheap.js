@@ -4,7 +4,7 @@ function initWiktionaryNamecheapPublication() {
 
     function domainCheckExpired(domain) {
         return !domain.last_checked ||
-               !moment(domain.last_checked).add(1,'minute').isAfter(moment());
+               !moment(domain.last_checked).add(1,'month').isAfter(moment());
     }
 
     function getWordRegex(word, suffix) {
