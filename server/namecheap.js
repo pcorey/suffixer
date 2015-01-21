@@ -1,5 +1,7 @@
 function initWiktionaryNamecheapPublication() {
 
+    //var throttledCheck = _.throttle(Namecheap.domains.check, 250);
+
     function domainCheckExpired(domain) {
         return !domain.last_checked ||
                !moment(domain.last_checked).add(1,'minute').isAfter(moment());
@@ -23,13 +25,16 @@ function initWiktionaryNamecheapPublication() {
     function getSelector(word, suffix, definition, hideRegistered) {
         var selector = {
             word: {$regex: getWordRegex(word, suffix), $options: 'i'},
-            definition: {$regex: getDefinitionRegex(definition), $options: 'i'}
+            definitions: {$regex: getDefinitionRegex(definition), $options: 'i'}
         };
 
         if (hideRegistered) {
             selector.domains = {
                 $elemMatch: {
-                    available: true
+                    $or: [
+                        {available: true},
+                        {available: undefined}
+                    ]
                 }
             };
         }
@@ -41,6 +46,25 @@ function initWiktionaryNamecheapPublication() {
         return {
             limit: limit,
             sort: {word: 1}
+        };
+    }
+
+    function buildProcessResult(domainMap) {
+        return function(result) {
+            if (result.ErrorNo) {
+                Kadira.trackError('Namecheap.domains.check', JSON.stringify(result));
+                return;
+            }
+            var id = domainMap[result.Domain];
+            Wiktionary.update({
+                '_id': id,
+                'domains.domain': result.Domain
+            }, {
+                $set: {
+                    'domains.$.available': result.Available,
+                    'domains.$.last_checked': new Date()
+                }
+            });
         };
     }
 
@@ -56,22 +80,12 @@ function initWiktionaryNamecheapPublication() {
                 Kadira.trackError('Namecheap.domains.check', JSON.stringify(res));
                 return;
             }
-            res.DomainCheckResult.map(function(result) {
-                if (result.ErrorNo) {
-                    Kadira.trackError('Namecheap.domains.check', JSON.stringify(result));
-                    return;
-                }
-                var id = domainMap[result.Domain];
-                Wiktionary.update({
-                    '_id': id,
-                    'domains.domain': result.Domain
-                }, {
-                    $set: {
-                        'domains.$.available': result.Available,
-                        'domains.$.last_checked': new Date()
-                    }
-                });
-            });
+            if (res.DomainCheckResult.constructor == Array) {
+                res.DomainCheckResult.map(buildProcessResult(domainMap));
+            }
+            else {
+                buildProcessResult(domainMap)(res.DomainCheckResult);
+            }
         })
     }
 
@@ -90,7 +104,9 @@ function initWiktionaryNamecheapPublication() {
     }
 
     function checkAndUpdateDomains(domainMap) {
-        Namecheap.domains.check(domainMap.domains, buildCheckCallback(domainMap.map));
+        if (domainMap.domains && domainMap.domains.length) {
+            Namecheap.domains.check(domainMap.domains, buildCheckCallback(domainMap.map));
+        }
     }
 
     Meteor.publish('wiktionary-namecheap', function(word, suffix, definition, limit, hideRegistered) {
