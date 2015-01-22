@@ -13,10 +13,9 @@ function initWiktionaryNamecheapPublication() {
     }
 
     function getDefinitionRegex(definition) {
-        if (definition) {
-            return '.*?'+definition+'.*?';
-        }
-        return '';
+        return {
+            $search: definition
+        };
     }
 
     function getSelector(suffix, definition, hideRegistered, favorites) {
@@ -28,7 +27,7 @@ function initWiktionaryNamecheapPublication() {
                 {
                     $and: [
                         {word: {$regex: getWordRegex(suffix), $options: 'i'}},
-                        {definitions: {$regex: getDefinitionRegex(definition), $options: 'i'}}
+                        {$text: getDefinitionRegex(definition)}
                     ]
                 }
             ]
