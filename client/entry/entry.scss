@@ -9,11 +9,11 @@
     padding: 10px;
     box-shadow: 1px 2px 8px rgba(0,0,0, 0.5);
 
-    outline: 4px solid transparent;
+    outline: 2px solid transparent;
     transition: all 0.25s ease-in-out;
 
     &.favorite {
-        outline: 4px solid #3fb6f2;
+        outline: 2px solid #3fb6f2;
     }
 
     &:nth-child(odd) {
@@ -26,9 +26,28 @@
         width: 100%;
         .word {
             font-weight: bold;
+            vertical-align: bottom;
+            .word-text {
+                vertical-align: bottom;
+                margin-right: 10px;
+            }
             .source {
+                font-size: 21px;
+                line-height: 1;
+                vertical-align: middle;
                 font-weight: normal;
                 color: #AAA;
+                cursor: pointer;
+                span {
+                    vertical-align: middle;
+                }
+                &:hover {
+                    text-decoration: none;
+                    color: #3fb6f2;
+                }
+                &.favorite {
+                    color: #3fb6f2;
+                }
             }
         }
         ul {

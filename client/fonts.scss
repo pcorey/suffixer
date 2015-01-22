@@ -23,44 +23,20 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-alert:before {
-    content: "\f02d";
-}
-
 .icon-check:before {
     content: "\f03a";
 }
 
-.icon-circle-slash:before {
-    content: "\f084";
-}
-
-.icon-dash:before {
-    content: "\f0ca";
+.icon-heart:before {
+    content: "\2665";
 }
 
 .icon-info:before {
     content: "\f059";
 }
 
-.icon-issue-closed:before {
-    content: "\f028";
-}
-
-.icon-issue-opened:before {
-    content: "\f026";
-}
-
-.icon-issue-reopened:before {
-    content: "\f027";
-}
-
-.icon-question:before {
-    content: "\f02c";
-}
-
-.icon-stop:before {
-    content: "\f08f";
+.icon-link-external:before {
+    content: "\f07f";
 }
 
 .icon-x:before {

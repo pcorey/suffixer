@@ -27,7 +27,7 @@ Template.entry.helpers({
 });
 
 Template.entry.events({
-    'click .entry': function(e, t) {
+    'click .favorite-button': function(e, t) {
         var favorites = Session.get('favorites');
         var idx = favorites.indexOf(this._id);
         if (idx == -1) {
