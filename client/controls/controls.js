@@ -17,7 +17,7 @@ Template.controls.events({
 
 Template.controls.helpers({
     tlds: function() {
-        return NamecheapTLDs.find({});
+        return NamecheapTLDs.find({}, {sort: {name: 1}});
     },
     showRegistered: function() {
         return Session.get('hideRegistered');
