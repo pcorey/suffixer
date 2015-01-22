@@ -25,6 +25,10 @@ Meteor.autorun(function() {
         });
 });
 
+Meteor.startup(function() {
+    GAnalytics.pageview('/');
+});
+
 Meteor.subscribe('tlds');
 
 //TODO: Move to full text seach mongo instance:
