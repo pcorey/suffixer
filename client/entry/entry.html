@@ -1,6 +1,5 @@
 <template name="entry">
-    <div class="entry fade">
-
+    <div class="entry fade {{#if isFavorite}}favorite{{/if}}">
         <div class="word-wrapper">
             <p class="word">{{word}} <span class="source">(<a href="http://en.wiktionary.org/wiki/{{word}}">source</a>)</span></p>
             <ul class="definitions">

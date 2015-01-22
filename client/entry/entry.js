@@ -20,5 +20,22 @@ Template.entry.helpers({
     },
     affiliateId: function() {
         return Meteor.settings.public.namecheap.affiliate_id;
+    },
+    isFavorite: function() {
+        return Session.get('favorites').indexOf(this._id) != -1;
+    }
+});
+
+Template.entry.events({
+    'click .entry': function(e, t) {
+        var favorites = Session.get('favorites');
+        var idx = favorites.indexOf(this._id);
+        if (idx == -1) {
+            favorites.push(this._id);
+        }
+        else {
+            favorites.splice(idx, 1);
+        }
+        Session.set('favorites', favorites);
     }
 });

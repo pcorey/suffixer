@@ -22,10 +22,19 @@ function initWiktionaryNamecheapPublication() {
         return '';
     }
 
-    function getSelector(word, suffix, definition, hideRegistered) {
+    function getSelector(word, suffix, definition, hideRegistered, favorites) {
         var selector = {
-            word: {$regex: getWordRegex(word, suffix), $options: 'i'},
-            definitions: {$regex: getDefinitionRegex(definition), $options: 'i'}
+            $or: [
+                {
+                    _id: {$in: favorites}
+                },
+                {
+                    $and: [
+                        {word: {$regex: getWordRegex(word, suffix), $options: 'i'}},
+                        {definitions: {$regex: getDefinitionRegex(definition), $options: 'i'}}
+                    ]
+                }
+            ]
         };
 
         if (hideRegistered) {
@@ -109,15 +118,14 @@ function initWiktionaryNamecheapPublication() {
         }
     }
 
-    Meteor.publish('wiktionary-namecheap', function(word, suffix, definition, limit, hideRegistered) {
+    Meteor.publish('wiktionary-namecheap', function(word, suffix, definition, limit, hideRegistered, favorites) {
         var results = Wiktionary.find(
-            getSelector(word, suffix, definition, hideRegistered),
+            getSelector(word, suffix, definition, hideRegistered, favorites),
             getOptions(limit));
         var domainMap = getDomainMap(results);
         checkAndUpdateDomains(domainMap);
         return results;
     });
-
 }
 
 Meteor.startup(function() {

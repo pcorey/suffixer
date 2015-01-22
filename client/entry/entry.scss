@@ -9,6 +9,13 @@
     padding: 10px;
     box-shadow: 1px 2px 8px rgba(0,0,0, 0.5);
 
+    outline: 4px solid transparent;
+    transition: all 0.25s ease-in-out;
+
+    &.favorite {
+        outline: 4px solid #3fb6f2;
+    }
+
     &:nth-child(odd) {
         background-color: #F0F0F0;
     }

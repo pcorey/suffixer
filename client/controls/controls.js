@@ -7,7 +7,6 @@ Template.controls.events({
     'keyup #definition': _.debounce(function(e, t) {
         Session.set('limit', 20);
         Session.set('definition', e.target.value);
-        Session.set('showHelp', !e.target.value);
         GAnalytics.event('controls', 'definition', e.target.value);
     }, 300),
     'change #hide-registered': function(e, t) {

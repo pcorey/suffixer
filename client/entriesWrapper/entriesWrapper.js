@@ -1,6 +1,15 @@
 Template.entriesWrapper.helpers({
     entries: function() {
-        return Wiktionary.find();
+        var favorites = Session.get('favorites');
+        return Wiktionary.find({}, {
+            transform: function(doc) {
+                var idx = favorites.indexOf(doc._id);
+                doc.favorite = idx == -1 ? Number.MAX_SAFE_INTEGER  : idx;
+                return doc;
+            }
+        }).fetch().sort(function(a, b) {
+            return a.favorite - b.favorite;
+        });
     },
     showMoreSpinner: function() {
         return Session.get('loading');
@@ -9,16 +18,16 @@ Template.entriesWrapper.helpers({
         return Session.get('loading');
     },
     showResults: function() {
-        return Session.get('definition');
+        return Session.get('definition') || Session.get('favorites').length;
     },
     showHelp: function() {
         return Session.get('showHelp');
     },
     resultsExist: function(entries) {
-        return entries.count();
+        return entries.length;
     },
     showNoResults: function(entries) {
-        return !entries.count() && !Session.get('showHelp');
+        return !entries.length && !Session.get('showHelp') && !Session.get('loading');
     }
 });
 
