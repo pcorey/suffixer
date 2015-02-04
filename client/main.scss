@@ -10,9 +10,6 @@ body {
     font-size: 16px;
     margin: 20px auto;
     width: 1024px;
-    border: 5px solid #F0F0F0;
-    border-radius: 8px;
-    position: relative;
 
     @media (max-width: 1064px) {
         margin: 20px 10px;
@@ -20,4 +17,10 @@ body {
     }
 
     overflow-y: scroll;
+}
+
+.body {
+    border: 5px solid #F0F0F0;
+    border-radius: 8px;
+    position: relative;
 }
