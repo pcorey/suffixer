@@ -3,7 +3,8 @@ function initWiktionaryNamecheapPublication() {
     //var throttledCheck = _.throttle(Namecheap.domains.check, 250);
 
     function domainCheckExpired(domain) {
-        return !domain.last_checked ||
+        return domain.available ||
+               !domain.last_checked ||
                !moment(domain.last_checked).add(1,'month').isAfter(moment());
     }
 
