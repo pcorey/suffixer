@@ -8,6 +8,9 @@ Template.entriesWrapper.helpers({
                 return doc;
             }
         }).fetch().sort(function(a, b) {
+            if (a.favorite == b.favorite) {
+                return a.word < b.word ? -1 : (a.word > b.word ? 1 : 0);
+            }
             return a.favorite - b.favorite;
         });
     },
