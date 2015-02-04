@@ -37,5 +37,8 @@ Template.entry.events({
             favorites.splice(idx, 1);
         }
         Session.set('favorites', favorites);
+    },
+    'click .link': function(e, t) {
+        GAnalytics.event('entry', 'click', e.currentTarget.innerText);
     }
 });
